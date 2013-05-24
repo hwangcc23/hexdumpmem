@@ -129,14 +129,14 @@ static int memdump(const void *map, unsigned int addr,
 		break;
 
 	case 2:
-		OUTPUT("%-8s   %04X %04X %04X %04X %04X %04X %04X %04X\n",
+		OUTPUT("%-8s   %4X %4X %4X %4X %4X %4X %4X %4X\n",
 			"addr", 0, 2, 4, 6, 8, 10, 12, 14);
 		OUTPUT("==============================");
 		OUTPUT("====================\n");
 		break;
 
 	case 4:
-		OUTPUT("%-8s   %08X %08X %08X %08X\n", "addr", 0, 4, 8, 12);
+		OUTPUT("%-8s   %8X %8X %8X %8X\n", "addr", 0, 4, 8, 12);
 		OUTPUT("==============================================\n");
 		break;
 

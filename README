@@ -11,7 +11,7 @@ to do it on my developing Android phone.
 1. Dump a memory region:
         % hexdumpmem -a 0x1000
         Memory region 0x00001000 ~ 0x0000116f
-        addr       00000000 00000004 00000008 0000000C
+        addr              0        4        8        C
         ==============================================
         00001000h: 4CFE8941 4CD47D8D 102A258B 8D4C0000
         00001010h: 000DFA2D 008CE900 0F660000 0000441F
@@ -40,7 +40,7 @@ to do it on my developing Android phone.
 2. Dump a memory region in half-word:
         % hexdumpmem -a 0x1000 -s 2
         Memory region 0x00001000 ~ 0x0000116f
-        addr       0000 0002 0004 0006 0008 000A 000C 000E
+        addr          0    2    4    6    8    A    C    E
         ==================================================
         00001000h: 8941 4CFE 7D8D 4CD4 258B 102A 0000 8D4C
         00001010h: FA2D 000D E900 008C 0000 0F66 441F 0000
@@ -100,7 +100,7 @@ to do it on my developing Android phone.
         Memory region 0x00001000 ~ 0x0000101f
         % hexdumpmem -a 0x1000 -s 4 -l 0x20
         Memory region 0x00001000 ~ 0x0000101f
-        addr       00000000 00000004 00000008 0000000C
+        addr              0        4        8        C
         ==============================================
         00001000h: 5555AAAA 5555AAAA 5555AAAA 5555AAAA
         00001010h: 5555AAAA 5555AAAA 5555AAAA 5555AAAA
