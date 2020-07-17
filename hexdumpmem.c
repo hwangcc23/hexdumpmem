@@ -95,6 +95,7 @@ static void writel(unsigned int val, void *addr)
 static int memdump(const void *map, unsigned int addr, 
 			unsigned int len, unsigned int size)
 {
+	unsigned char *ptr = (unsigned char *)map;
 	unsigned int start, end, line, byte;
 
 	if (!map) {
@@ -114,9 +115,9 @@ static int memdump(const void *map, unsigned int addr,
 	end = ROUND_UP(addr + len, DUMP_BYTE_PER_LINE);
 	LOGD("Dump memory 0x%08X ~ 0x%08X\n", start, end);
 
-	LOGD("Before adjust, map = %p\n", map);
-	map += start - ROUND_DOWN(addr, getpagesize());
-	LOGD("After adjust, map = %p\n", map);
+	LOGD("Before adjust, ptr = %p\n", ptr);
+	ptr += start - ROUND_DOWN(addr, getpagesize());
+	LOGD("After adjust, ptr = %p\n", ptr);
 
 	switch (size) {
 	case 1:
@@ -149,15 +150,15 @@ static int memdump(const void *map, unsigned int addr,
 		for (byte = 0; byte < DUMP_BYTE_PER_LINE; byte += size) {
 			switch (size) {
 			case 1:
-				OUTPUT("%02X ", readb(map + line + byte));
+				OUTPUT("%02X ", readb(ptr + line + byte));
 				break;
 
 			case 2:
-				OUTPUT("%04X ", readw(map + line + byte));
+				OUTPUT("%04X ", readw(ptr + line + byte));
 				break;
 
 			case 4:
-				OUTPUT("%08X ", readl(map + line + byte));
+				OUTPUT("%08X ", readl(ptr + line + byte));
 				break;
 			default:
 				break;
@@ -172,6 +173,7 @@ static int memdump(const void *map, unsigned int addr,
 static int memfill(void *map, unsigned int addr, unsigned int len, 
 			unsigned int size, unsigned int val)
 {
+	unsigned char *ptr = (unsigned char *)map;
 	unsigned int byte;
 
 	if (!map) {
@@ -192,27 +194,27 @@ static int memfill(void *map, unsigned int addr, unsigned int len,
 	}
 
 	LOGD("Before adjust, map = %p\n", map);
-	map += addr - ROUND_DOWN(addr, getpagesize());
+	ptr += addr - ROUND_DOWN(addr, getpagesize());
 	LOGD("After adjust, map = %p\n", map);
 
 	for (byte = 0; byte < len; byte += size) {
 		switch (size) {
 		case 1:
 			LOGD("Write 0x%02X to *(%p)\n", 
-				(unsigned char)val, map + byte);
-			writeb(val, map + byte);
+				(unsigned char)val, ptr + byte);
+			writeb(val, ptr + byte);
 			break;
 
 		case 2:
 			LOGD("Write 0x%02X to *(%p)\n", 
-				(unsigned short)val, map + byte);
-			writew(val, map + byte);
+				(unsigned short)val, ptr + byte);
+			writew(val, ptr + byte);
 			break;
 
 		case 4:
 			LOGD("Write 0x%02X to *(%p)\n", 
-				(unsigned int)val, map + byte);
-			writel(val, map + byte);
+				(unsigned int)val, ptr + byte);
+			writel(val, ptr + byte);
 			break;
 
 		default:
