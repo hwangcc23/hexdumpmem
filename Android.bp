@@ -1,0 +1,20 @@
+cc_binary {
+    name: "hexdumpmem",
+
+    srcs: [
+        "hexdumpmem.c",
+    ],
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-pointer-arith",
+        "-Wno-sign-compare",
+        "-Wno-unused-parameter",
+    ],
+
+    owner: "hwangcc23@outlook.com",
+
+    // Install hexdumpmem into a vendor partition
+    vendor: true,
+}
